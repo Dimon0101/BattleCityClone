@@ -38,15 +38,47 @@ namespace WpfApp1
             Canvas.SetTop(tank, 100);
             BattleCity.Children.Add(tank);
 
-            wall = new Rectangle()
+            
+            for (int i = 0; i < 520; i += 20)
             {
-                Width = 20,
-                Height = 20,
-                Fill = Brushes.Brown,
-            };
-            Canvas.SetLeft(wall, 120);
-            Canvas.SetTop(wall, 120);
-            BattleCity.Children.Add(wall);
+                for (int j = 0; j < 600; j += 20)
+                {
+                    wall = new Rectangle()
+                    {
+                        Width = 20,
+                        Height = 20,
+                        Fill = Brushes.Brown,
+                    };
+                    if (i %40 == 0 && j %40 == 0)
+                    {
+                        Canvas.SetLeft(wall, j);
+                        Canvas.SetTop(wall, i);
+                    }
+                    else
+                    {
+                        Canvas.SetLeft(wall, 0);
+                    }
+                    BattleCity.Children.Add(wall);
+                }
+            }
+
+        }
+        UIElement GetElementAt(double x, double y)
+        {
+            foreach (UIElement element in BattleCity.Children)
+            {
+                double left = Canvas.GetLeft(element);
+                double top = Canvas.GetTop(element);
+                double width = (element as FrameworkElement)?.ActualWidth ?? 0;
+                double height = (element as FrameworkElement)?.ActualHeight ?? 0;
+
+                if (x >= left && x < left + width &&
+                    y >= top && y < top + height)
+                {
+                    return element;
+                }
+            }
+            return null;
         }
         private void Window_KeyDown(object sender, KeyEventArgs e)
         {
@@ -70,8 +102,15 @@ namespace WpfApp1
         {
             double left = Canvas.GetLeft(tank);
             double top = Canvas.GetTop(tank);
-            Canvas.SetLeft(tank, left+movex);
-            Canvas.SetTop(tank, top+movey);
+            var found = GetElementAt(left+movex, top+movey);
+            if (found != null)
+            {
+            }
+            else
+            {
+                Canvas.SetLeft(tank, left + movex);
+                Canvas.SetTop(tank, top + movey);
+            }
         }
     }
 

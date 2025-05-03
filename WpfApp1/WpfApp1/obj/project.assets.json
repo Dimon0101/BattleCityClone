@@ -14,11 +14,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\user\\source\\repos\\WpfApp1\\WpfApp1\\WpfApp1.csproj",
+      "projectUniqueName": "C:\\Users\\user\\Documents\\GitHub\\BattleCityClone\\WpfApp1\\WpfApp1\\WpfApp1.csproj",
       "projectName": "WpfApp1",
-      "projectPath": "C:\\Users\\user\\source\\repos\\WpfApp1\\WpfApp1\\WpfApp1.csproj",
+      "projectPath": "C:\\Users\\user\\Documents\\GitHub\\BattleCityClone\\WpfApp1\\WpfApp1\\WpfApp1.csproj",
       "packagesPath": "C:\\Users\\user\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\user\\source\\repos\\WpfApp1\\WpfApp1\\obj\\",
+      "outputPath": "C:\\Users\\user\\Documents\\GitHub\\BattleCityClone\\WpfApp1\\WpfApp1\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "G:\\Новая папка (3)\\NuGetPackages"
