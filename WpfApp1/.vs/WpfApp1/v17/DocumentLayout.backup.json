@@ -17,7 +17,7 @@
       "VerticalTabListWidth": 256,
       "DocumentGroups": [
         {
-          "DockedWidth": 200,
+          "DockedWidth": 639,
           "SelectedChildIndex": 4,
           "Children": [
             {
@@ -26,11 +26,11 @@
             },
             {
               "$type": "Bookmark",
-              "Name": "ST:0:0:{e5c86464-96be-4d7c-9a8b-abcb3bbf5f92}"
+              "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
             },
             {
               "$type": "Bookmark",
-              "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
+              "Name": "ST:0:0:{e5c86464-96be-4d7c-9a8b-abcb3bbf5f92}"
             },
             {
               "$type": "Document",
@@ -51,7 +51,7 @@
               "RelativeDocumentMoniker": "WpfApp1\\MainWindow.xaml.cs",
               "ToolTip": "C:\\Users\\user\\Documents\\GitHub\\BattleCityClone\\WpfApp1\\WpfApp1\\MainWindow.xaml.cs*",
               "RelativeToolTip": "WpfApp1\\MainWindow.xaml.cs*",
-              "ViewState": "AgIAAE0AAAAAAAAAAAAgwGgAAAA6AAAAAAAAAA==",
+              "ViewState": "AgIAAGEAAAAAAAAAAAAowG4AAAAmAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-05-03T17:23:00.48Z",
               "EditorCaption": ""
