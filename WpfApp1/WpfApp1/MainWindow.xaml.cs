@@ -17,15 +17,13 @@ namespace WpfApp1
     /// </summary>
     public partial class MainWindow : Window
     {
-        Rectangle Tank;
+        Rectangle Tank1;
+        Rectangle Tank2;
         Rectangle Wall;
         List<Rectangle> Map = new List<Rectangle>();
-        Key LastKey = new Key();
-        Rectangle DeletedeObject = new Rectangle()
-        {
-            Width = 20,
-            Height = 20,
-        };
+        List<Rectangle> Tanks = new List<Rectangle>();
+        Key TankLastKey1 = new Key();
+        Key TankLastKey2 = new Key();
 
         public MainWindow()
         {
@@ -35,16 +33,25 @@ namespace WpfApp1
 
         void Game()
         {
-            Tank = new Rectangle()
+            Tank1 = new Rectangle()
             {
                 Width = 20, 
                 Height = 20,
                 Fill = Brushes.Green
             };
-            Canvas.SetLeft(Tank, 100);
-            Canvas.SetTop(Tank, 100);
-            BattleCity.Children.Add(Tank);
-            for(int i = 0; i < 520; i +=20)
+            Canvas.SetLeft(Tank1, 100);
+            Canvas.SetTop(Tank1, 100);
+            BattleCity.Children.Add(Tank1);
+            Tank2 = new Rectangle()
+            {
+                Width = 20,
+                Height = 20,
+                Fill = Brushes.Green
+            };
+            Canvas.SetLeft(Tank2, 200);
+            Canvas.SetTop(Tank2, 100);
+            BattleCity.Children.Add(Tank2);
+            for (int i = 0; i < 520; i +=20)
             {
                 for (int j = 0; j < 600; j += 20)
                 {
@@ -83,32 +90,51 @@ namespace WpfApp1
             switch(e.Key)
             {
                 case Key.A:
-                    LastKey = e.Key;
-                    MoveTank(-20, 0);
+                    TankLastKey1 = e.Key;
+                    MoveTank(-20, 0, Tank1);
                     break;
                 case Key.D:
-                    LastKey = e.Key;
-                    MoveTank(20, 0);
+                    TankLastKey1 = e.Key;
+                    MoveTank(20, 0, Tank1);
                     break;
                 case Key.W:
-                    LastKey = e.Key;
-                    MoveTank(0, -20);
+                    TankLastKey1 = e.Key;
+                    MoveTank(0, -20, Tank1);
                     break;
                 case Key.S:
-                    LastKey = e.Key;
-                    MoveTank(0, 20);
+                    TankLastKey1 = e.Key;
+                    MoveTank(0, 20, Tank1);
+                    break;
+                case Key.Left:
+                    TankLastKey2 = e.Key;
+                    MoveTank(-20, 0, Tank2);
+                    break;
+                case Key.Right:
+                    TankLastKey2 = e.Key;
+                    MoveTank(20, 0, Tank2);
+                    break;
+                case Key.Up:
+                    TankLastKey2 = e.Key;
+                    MoveTank(0, -20, Tank2);
+                    break;
+                case Key.Down:
+                    TankLastKey2 = e.Key;
+                    MoveTank(0, 20, Tank2);
                     break;
                 case Key.Space:
-                    ShotTank();
+                    ShotTank(Tank1);
+                    break;
+                case Key.LeftCtrl:
+                    ShotTank(Tank2);
                     break;
             }
         }
-        void ShotTank()
+        void ShotTank(Rectangle Tank)
         {
             bool FoundedAim = false;
             double Left = Canvas.GetLeft(Tank);
             double Top = Canvas.GetTop(Tank);
-            for(double i = Top; i >= 0 && LastKey == Key.W; i-=20)
+            for(double i = Top; i >= 0 && (TankLastKey1 == Key.W || TankLastKey2 == Key.Up); i-=20)
             {
                 foreach (Rectangle Element in Map)
                 {
@@ -127,7 +153,7 @@ namespace WpfApp1
                     break;
                 }
             }
-            for (double i = Top; i < 520 && LastKey == Key.S; i += 20)
+            for (double i = Top; i < 520 && (TankLastKey1 == Key.S || TankLastKey2 == Key.Down); i += 20)
             {
                 foreach (Rectangle Element in Map)
                 {
@@ -146,7 +172,7 @@ namespace WpfApp1
                     break;
                 }
             }
-            for (double i = Left; i >= 0 && LastKey == Key.A; i -= 20)
+            for (double i = Left; i >= 0 && (TankLastKey1 == Key.A || TankLastKey2 == Key.Left); i -= 20)
             {
                 foreach (Rectangle Element in Map)
                 {
@@ -165,7 +191,7 @@ namespace WpfApp1
                     break;
                 }
             }
-            for (double i = Top; i < 600 && LastKey == Key.D; i += 20)
+            for (double i = Top; i < 600 && (TankLastKey1 == Key.D || TankLastKey2 == Key.Right); i += 20)
             {
                 foreach (Rectangle Element in Map)
                 {
@@ -185,7 +211,7 @@ namespace WpfApp1
                 }
             }
         }
-        void MoveTank(int Movex, int Movey)
+        void MoveTank(int Movex, int Movey, Rectangle Tank)
         {
             double Left = Canvas.GetLeft(Tank);
             double Top = Canvas.GetTop(Tank);
