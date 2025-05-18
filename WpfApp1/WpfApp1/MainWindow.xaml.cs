@@ -9,6 +9,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Windows.Threading;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace WpfApp1
 {
@@ -24,6 +25,9 @@ namespace WpfApp1
         List<Rectangle> Tanks = new List<Rectangle>();
         Key TankLastKey1 = new Key();
         Key TankLastKey2 = new Key();
+        Uri Tank1Texture = new Uri("C:\\Users\\user\\Documents\\GitHub\\BattleCityClone\\WpfApp1\\WpfApp1\\Textures\\Tank1.jpg");
+        Uri Tank2Texture = new Uri("C:\\Users\\user\\Documents\\GitHub\\BattleCityClone\\WpfApp1\\WpfApp1\\Textures\\Tank2.jpg");
+        Uri BlockTexture = new Uri("C:\\Users\\user\\Documents\\GitHub\\BattleCityClone\\WpfApp1\\WpfApp1\\Textures\\Block.png");
 
         public MainWindow()
         {
@@ -37,7 +41,7 @@ namespace WpfApp1
             {
                 Width = 20, 
                 Height = 20,
-                Fill = Brushes.Green
+                Fill = new ImageBrush(new BitmapImage(Tank1Texture))
             };
             Canvas.SetLeft(Tank1, 100);
             Canvas.SetTop(Tank1, 100);
@@ -46,7 +50,7 @@ namespace WpfApp1
             {
                 Width = 20,
                 Height = 20,
-                Fill = Brushes.Green
+                Fill = new ImageBrush(new BitmapImage(Tank2Texture))
             };
             Canvas.SetLeft(Tank2, 200);
             Canvas.SetTop(Tank2, 100);
@@ -59,7 +63,7 @@ namespace WpfApp1
                     {
                         Width = 20,
                         Height = 20,
-                        Fill = Brushes.Red,
+                        Fill = new ImageBrush(new BitmapImage(BlockTexture)),
                     };
                     if (i % 40 == 0 && j % 40 == 0)
                     {
@@ -87,44 +91,70 @@ namespace WpfApp1
         }
         private void Window_KeyDown(object Sender, KeyEventArgs e)
         {
-            switch(e.Key)
+            ImageBrush brush;
+            switch (e.Key)
             {
                 case Key.A:
                     TankLastKey1 = e.Key;
+                    brush = new ImageBrush(new BitmapImage(Tank1Texture));
+                    brush.RelativeTransform = new RotateTransform(270, 0.5, 0.5);
+                    Tank1.Fill = brush;
                     MoveTank(-20, 0, Tank1);
                     break;
                 case Key.D:
                     TankLastKey1 = e.Key;
+                    TankLastKey1 = e.Key;
+                    brush = new ImageBrush(new BitmapImage(Tank1Texture));
+                    brush.RelativeTransform = new RotateTransform(90, 0.5, 0.5);
+                    Tank1.Fill = brush;
                     MoveTank(20, 0, Tank1);
                     break;
                 case Key.W:
                     TankLastKey1 = e.Key;
                     MoveTank(0, -20, Tank1);
+                    brush = new ImageBrush(new BitmapImage(Tank1Texture));
+                    brush.RelativeTransform = new RotateTransform(0, 0.5, 0.5);
+                    Tank1.Fill = brush;
                     break;
                 case Key.S:
                     TankLastKey1 = e.Key;
                     MoveTank(0, 20, Tank1);
+                    brush = new ImageBrush(new BitmapImage(Tank1Texture));
+                    brush.RelativeTransform = new RotateTransform(180, 0.5, 0.5);
+                    Tank1.Fill = brush;
                     break;
                 case Key.Left:
                     TankLastKey2 = e.Key;
+                    brush = new ImageBrush(new BitmapImage(Tank2Texture));
+                    brush.RelativeTransform = new RotateTransform(270, 0.5, 0.5);
+                    Tank2.Fill = brush;
                     MoveTank(-20, 0, Tank2);
                     break;
                 case Key.Right:
                     TankLastKey2 = e.Key;
+                    brush = new ImageBrush(new BitmapImage(Tank2Texture));
+                    brush.RelativeTransform = new RotateTransform(90, 0.5, 0.5);
+                    Tank2.Fill = brush;
                     MoveTank(20, 0, Tank2);
                     break;
                 case Key.Up:
                     TankLastKey2 = e.Key;
+                    brush = new ImageBrush(new BitmapImage(Tank2Texture));
+                    brush.RelativeTransform = new RotateTransform(0, 0.5, 0.5);
+                    Tank2.Fill = brush;
                     MoveTank(0, -20, Tank2);
                     break;
                 case Key.Down:
                     TankLastKey2 = e.Key;
+                    brush = new ImageBrush(new BitmapImage(Tank2Texture));
+                    brush.RelativeTransform = new RotateTransform(180, 0.5, 0.5);
+                    Tank2.Fill = brush;
                     MoveTank(0, 20, Tank2);
                     break;
                 case Key.Space:
                     ShotTank(Tank1);
                     break;
-                case Key.LeftCtrl:
+                case Key.M:
                     ShotTank(Tank2);
                     break;
             }
@@ -191,7 +221,7 @@ namespace WpfApp1
                     break;
                 }
             }
-            for (double i = Top; i < 600 && (TankLastKey1 == Key.D || TankLastKey2 == Key.Right); i += 20)
+            for (double i = Left; i < 600 && (TankLastKey1 == Key.D || TankLastKey2 == Key.Right); i += 20)
             {
                 foreach (Rectangle Element in Map)
                 {
